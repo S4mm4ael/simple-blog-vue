@@ -1,14 +1,8 @@
 <template>
   <div>
-    <div>
-      <button @click="addLike">Like</button>
-      <button @click="addDislike">Dislike</button>
-    </div>
-    <div>
-      Likes: <strong>{{ likes }}</strong>
-    </div>
-    <div>
-      Dislikes: <strong>{{ dislikes }}</strong>
+    <div class="post" v-for="post in posts" :key="post.id">
+      <div class=""><strong>Title: </strong>{{ post.title }}</div>
+      <div class=""><strong>Description: </strong>{{ post.body }}</div>
     </div>
   </div>
 </template>
@@ -17,8 +11,11 @@
 export default {
   data() {
     return {
-      likes: 0,
-      dislikes: 5
+      posts: [
+        { id: 1, title: 'JavaScript', body: 'Lorem ipsum 1' },
+        { id: 2, title: 'JavaScript 2', body: 'Lorem ipsum 2' },
+        { id: 3, title: 'JavaScript 3', body: 'Lorem ipsum 3' }
+      ]
     }
   },
   methods: {
@@ -32,4 +29,15 @@ export default {
 }
 </script>
 
-<style></style>
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+.post {
+  padding: 10px;
+  border: 2px solid green;
+  margin-top: 10px;
+}
+</style>
