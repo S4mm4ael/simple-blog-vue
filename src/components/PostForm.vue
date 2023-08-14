@@ -1,21 +1,9 @@
 <template>
   <form @submit.prevent>
     <h3>Add new post</h3>
-    <input
-      v-model="post.title"
-      @input="post.title = $event.target.value"
-      class="input"
-      type="text"
-      placeholder="Title"
-    />
-    <input
-      v-model="post.body"
-      @input="post.body = $event.target.value"
-      class="input"
-      type="text"
-      placeholder="Description"
-    />
-    <button class="btn" @click="createPost">Create</button>
+    <InputRegular v-model="post.title" class="input" type="text" placeholder="Title" />
+    <InputRegular v-model="post.body" class="input" type="text" placeholder="Description" />
+    <ButtonRegular class="btn" @click="createPost"> Create post </ButtonRegular>
   </form>
 </template>
 
@@ -46,28 +34,13 @@ export default {
 form {
   display: flex;
   flex-direction: column;
+  width: 98%;
 }
+
 .btn {
   margin-top: 10px;
-  align-self: flex-end;
-  padding: 10px;
-  background: none;
-  border: 2px solid turquoise;
-  cursor: pointer;
-  transition: 0.3s;
-  font-weight: 800;
-  border-radius: 10px;
-  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }
 .btn:hover {
-  border: 2px solid forestgreen;
-}
-.input {
-  width: 100%;
-  border: 1px solid black;
-  border-radius: 10px;
-  padding: 10px 10px;
-  margin-top: 10px;
-  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  box-shadow: rgba(0, 255, 255, 0.45) 0px 5px 15px;
 }
 </style>
