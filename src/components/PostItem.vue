@@ -4,7 +4,7 @@
       <div class=""><strong>Title: </strong>{{ post.title }}</div>
       <div class=""><strong>Description: </strong>{{ post.body }}</div>
     </div>
-    <ButtonRegular class="post__btn">Delete</ButtonRegular>
+    <ButtonRegular class="post__btn" @click="$emit('remove', post)">Delete</ButtonRegular>
   </div>
 </template>
 
