@@ -1,20 +1,8 @@
 <template>
   <form @submit.prevent>
     <h3>Add new post</h3>
-    <InputRegular
-      v-model="post.title"
-      @input="post.title = $event.target.value"
-      class="input"
-      type="text"
-      placeholder="Title"
-    />
-    <InputRegular
-      v-model="post.body"
-      @input="post.body = $event.target.value"
-      class="input"
-      type="text"
-      placeholder="Description"
-    />
+    <InputRegular v-model="post.title" class="input" type="text" placeholder="Title" />
+    <InputRegular v-model="post.body" class="input" type="text" placeholder="Description" />
     <ButtonRegular class="btn" @click="createPost"> Create post </ButtonRegular>
   </form>
 </template>
