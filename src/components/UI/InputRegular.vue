@@ -1,18 +1,27 @@
 <template>
-  <input type="text" class="input" id="" />
+  <input :value="modelValue" @input="updateInput" type="text" class="input" id="" />
 </template>
 
 <script>
 export default {
-  name: 'InputRegular'
+  name: 'InputRegular',
+  props: {
+    modelValue: [String, Number]
+  },
+  methods: {
+    updateInput(event) {
+      this.$emit('update:modelValue', event.target.value)
+    }
+  }
 }
 </script>
 
 <style scoped>
 .input {
+  all: unset;
   width: 100%;
   cursor: pointer;
-  border: 2px solid black;
+  border: 0px solid black;
   border-radius: 10px;
   padding: 10px 10px;
   margin-top: 10px;
@@ -21,6 +30,6 @@ export default {
 }
 .input:hover,
 .input:focus {
-  border: 2px solid turquoise;
+  box-shadow: rgba(0, 255, 255, 0.35) 0px 5px 15px;
 }
 </style>

@@ -46,6 +46,7 @@ export default {
 form {
   display: flex;
   flex-direction: column;
+  width: 98%;
 }
 
 .btn {
