@@ -1,14 +1,14 @@
 <template>
   <form @submit.prevent>
     <h3>Add new post</h3>
-    <input
+    <InputRegular
       v-model="post.title"
       @input="post.title = $event.target.value"
       class="input"
       type="text"
       placeholder="Title"
     />
-    <input
+    <InputRegular
       v-model="post.body"
       @input="post.body = $event.target.value"
       class="input"
@@ -48,14 +48,6 @@ form {
   flex-direction: column;
 }
 
-.input {
-  width: 100%;
-  border: 1px solid black;
-  border-radius: 10px;
-  padding: 10px 10px;
-  margin-top: 10px;
-  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-}
 .btn {
   margin-top: 10px;
   border: 3px solid turquoise;
