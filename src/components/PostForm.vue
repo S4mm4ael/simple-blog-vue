@@ -15,7 +15,7 @@
       type="text"
       placeholder="Description"
     />
-    <button class="btn" @click="createPost">Create</button>
+    <ButtonRegular class="btn" @click="createPost"> Create post </ButtonRegular>
   </form>
 </template>
 
@@ -47,21 +47,7 @@ form {
   display: flex;
   flex-direction: column;
 }
-.btn {
-  margin-top: 10px;
-  align-self: flex-end;
-  padding: 10px;
-  background: none;
-  border: 2px solid turquoise;
-  cursor: pointer;
-  transition: 0.3s;
-  font-weight: 800;
-  border-radius: 10px;
-  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-}
-.btn:hover {
-  border: 2px solid forestgreen;
-}
+
 .input {
   width: 100%;
   border: 1px solid black;
@@ -69,5 +55,12 @@ form {
   padding: 10px 10px;
   margin-top: 10px;
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+.btn {
+  margin-top: 10px;
+  border: 3px solid turquoise;
+}
+.btn:hover {
+  border: 3px solid blue;
 }
 </style>
