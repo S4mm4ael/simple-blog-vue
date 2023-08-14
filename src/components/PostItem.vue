@@ -29,10 +29,8 @@ export default {
   align-items: center;
   justify-content: space-between;
 }
-.post__btn {
-  border: 3px solid orange;
-}
+
 .post__btn:hover {
-  border: 3px solid orangered;
+  box-shadow: rgba(255, 0, 0, 0.35) 0px 5px 15px;
 }
 </style>

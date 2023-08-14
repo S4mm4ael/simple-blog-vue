@@ -50,9 +50,8 @@ form {
 
 .btn {
   margin-top: 10px;
-  border: 3px solid turquoise;
 }
 .btn:hover {
-  border: 3px solid blue;
+  box-shadow: rgba(0, 255, 255, 0.45) 0px 5px 15px;
 }
 </style>
