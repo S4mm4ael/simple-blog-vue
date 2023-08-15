@@ -34,7 +34,7 @@ export default {
 form {
   display: flex;
   flex-direction: column;
-  width: 98%;
+  align-items: center;
 }
 
 .btn {

@@ -1,9 +1,9 @@
 <template>
-  <div v-if="posts.length > 0">
+  <div v-show="posts.length > 0">
     <h2>Posts</h2>
     <PostItem v-for="post in posts" :post="post" :key="post.id" @remove="$emit('remove', post)" />
   </div>
-  <h2 class="postList__emptyHeader" v-else>There is no posts...</h2>
+  <h2 class="postList__emptyHeader" v-show="posts.length == 0">There is no posts...</h2>
 </template>
 
 <script>
