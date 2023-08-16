@@ -1,13 +1,12 @@
 <template>
   <div class="app">
     <h1>Posts page</h1>
-    <ButtonRegular @click="fetchPosts">Get posts</ButtonRegular>
     <ButtonRegular @click="showDialog">Create new post</ButtonRegular>
     <dialog-regular v-model:show="dialogVisible">
       <post-form @create="createPost" />
     </dialog-regular>
-
-    <post-list :posts="posts" @remove="removePost" />
+    <post-list :posts="posts" @remove="removePost" v-if="!isPostsLoading" />
+    <SpinnerRegular class="app__spinner" v-else>Posts is loading...</SpinnerRegular>
   </div>
 </template>
 
@@ -26,7 +25,8 @@ export default {
   data() {
     return {
       posts: [],
-      dialogVisible: false
+      dialogVisible: false,
+      isPostsLoading: true
     }
   },
   methods: {
@@ -43,13 +43,19 @@ export default {
     async fetchPosts() {
       try {
         const url = 'https://jsonplaceholder.typicode.com/posts?_limit=10'
-        const response = await axios.get(url)
-        this.posts = response.data
+        setTimeout(async () => {
+          const response = await axios.get(url)
+          this.posts = response.data
+          this.isPostsLoading = false
+        }, 1000)
       } catch (e) {
         alert('Error, see console for details')
         console.log(e.message)
       }
     }
+  },
+  mounted() {
+    this.fetchPosts()
   }
 }
 </script>
@@ -65,5 +71,9 @@ export default {
   flex-direction: column;
   gap: 10px;
   padding: 20px;
+}
+.app__spinner {
+  margin: 0 auto;
+  margin-top: 50%;
 }
 </style>
