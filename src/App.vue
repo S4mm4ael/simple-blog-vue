@@ -5,7 +5,7 @@
       <ButtonRegular class="app__btn"> New btn</ButtonRegular>
       <SelectRegular v-model="selectedSort" :options="sortOptions"></SelectRegular>
     </div>
-    <ButtonRegular class="app__btn" @click="showDialog">Create new post</ButtonRegular>
+    <ButtonRegular class="app__btn_create" @click="showDialog">Create new post</ButtonRegular>
     <DialogRegular v-model:show="dialogVisible">
       <post-form @create="createPost" />
     </DialogRegular>
@@ -73,11 +73,12 @@ export default {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 .app {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 20px;
   padding: 20px;
 }
 .app__spinner {
@@ -87,5 +88,10 @@ export default {
 .app__btn__wrapper {
   display: flex;
   justify-content: space-between;
+  align-items: center;
+}
+.app__btn_create {
+  margin: 0 auto;
+  width: 30em;
 }
 </style>
