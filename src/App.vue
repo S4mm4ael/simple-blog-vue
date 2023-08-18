@@ -1,11 +1,15 @@
 <template>
   <div class="app">
     <h1>Posts page</h1>
-    <ButtonRegular @click="showDialog">Create new post</ButtonRegular>
-    <dialog-regular v-model:show="dialogVisible">
+    <div class="app__btn__wrapper">
+      <ButtonRegular class="app__btn"> New btn</ButtonRegular>
+      <SelectRegular v-model="selectedSort" :options="sortOptions"></SelectRegular>
+    </div>
+    <ButtonRegular class="app__btn" @click="showDialog">Create new post</ButtonRegular>
+    <DialogRegular v-model:show="dialogVisible">
       <post-form @create="createPost" />
-    </dialog-regular>
-    <post-list :posts="posts" @remove="removePost" v-if="!isPostsLoading" />
+    </DialogRegular>
+    <PostList :posts="posts" @remove="removePost" v-if="!isPostsLoading" />
     <SpinnerRegular class="app__spinner" v-else>Posts is loading...</SpinnerRegular>
   </div>
 </template>
@@ -13,20 +17,24 @@
 <script>
 import PostList from './components/PostList.vue'
 import PostForm from './components/PostForm.vue'
-import DialogRegular from './components/UI/DialogRegular.vue'
 import axios from 'axios'
 
 export default {
   components: {
     PostList,
-    PostForm,
-    DialogRegular
+    PostForm
   },
   data() {
     return {
       posts: [],
       dialogVisible: false,
-      isPostsLoading: true
+      isPostsLoading: true,
+      selectedSort: '',
+      sortOptions: [
+        { value: 'title', name: 'By name' },
+        { value: 'body', name: 'By content' },
+        { value: 'id', name: 'By time' }
+      ]
     }
   },
   methods: {
@@ -75,5 +83,9 @@ export default {
 .app__spinner {
   margin: 0 auto;
   margin-top: 50%;
+}
+.app__btn__wrapper {
+  display: flex;
+  justify-content: space-between;
 }
 </style>
