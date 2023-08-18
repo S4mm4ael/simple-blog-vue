@@ -2,13 +2,13 @@
   <div class="app">
     <h1>Posts page</h1>
     <div class="app__btn__wrapper">
-      <ButtonRegular class="app__btn"> New btn</ButtonRegular>
-      <SelectRegular v-model="selectedSort" :options="sortOptions"></SelectRegular>
+      <SelectRegular v-model="selectedSort" :options="sortOptions" />
+      <ButtonRegular class="app__btn_create" @click="showDialog">Create new post</ButtonRegular>
     </div>
-    <ButtonRegular class="app__btn_create" @click="showDialog">Create new post</ButtonRegular>
     <DialogRegular v-model:show="dialogVisible">
       <post-form @create="createPost" />
     </DialogRegular>
+
     <PostList :posts="posts" @remove="removePost" v-if="!isPostsLoading" />
     <SpinnerRegular class="app__spinner" v-else>Posts is loading...</SpinnerRegular>
   </div>
@@ -64,6 +64,11 @@ export default {
   },
   mounted() {
     this.fetchPosts()
+  },
+  watch: {
+    selectedSort(newValue) {
+      console.log(newValue)
+    }
   }
 }
 </script>
@@ -80,6 +85,10 @@ export default {
   flex-direction: column;
   gap: 20px;
   padding: 20px;
+  min-height: 100vh;
+  background: linear-gradient(to bottom, #fa709930, #0d00ff3f);
+  background-size: 100%;
+  background-repeat: no-repeat;
 }
 .app__spinner {
   margin: 0 auto;
@@ -88,10 +97,5 @@ export default {
 .app__btn__wrapper {
   display: flex;
   justify-content: space-between;
-  align-items: center;
-}
-.app__btn_create {
-  margin: 0 auto;
-  width: 30em;
 }
 </style>

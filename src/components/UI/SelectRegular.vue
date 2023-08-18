@@ -1,6 +1,6 @@
 <template>
   <select :value="modelValue" @input="changeOption">
-    <option disabled selected value="">Sort posts by</option>
+    <option disabled selected value="">Sort posts</option>
     <option v-for="option in options" :key="option.value" :value="option.value">
       {{ option.name }}
     </option>
@@ -30,7 +30,7 @@ select {
   appearance: none;
   border: 0;
   outline: 0;
-  width: 12em;
+  width: 10em;
   height: 3rem;
   padding: 0 4em 0 1em;
   background:
