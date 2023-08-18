@@ -21,6 +21,8 @@ export default {
 
 <style scoped>
 .post {
+  display: flex;
+  gap: 10px;
   padding: 10px;
   border-radius: 10px;
   margin-top: 10px;

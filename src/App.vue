@@ -8,8 +8,7 @@
     <DialogRegular v-model:show="dialogVisible">
       <post-form @create="createPost" />
     </DialogRegular>
-
-    <PostList :posts="posts" @remove="removePost" v-if="!isPostsLoading" />
+    <PostList :posts="selectSort" @remove="removePost" v-if="!isPostsLoading" />
     <SpinnerRegular class="app__spinner" v-else>Posts is loading...</SpinnerRegular>
   </div>
 </template>
@@ -33,7 +32,7 @@ export default {
       sortOptions: [
         { value: 'title', name: 'By name' },
         { value: 'body', name: 'By content' },
-        { value: 'id', name: 'By time' }
+        { value: 'id', name: 'By id' }
       ]
     }
   },
@@ -65,11 +64,23 @@ export default {
   mounted() {
     this.fetchPosts()
   },
-  watch: {
-    selectedSort(newValue) {
-      console.log(newValue)
+  computed: {
+    selectSort() {
+      if (this.selectedSort === 'id') {
+        return [...this.posts].sort((post1, post2) => post1.id - post2.id)
+      }
+      return [...this.posts].sort((post1, post2) =>
+        post1[this.selectedSort]?.localeCompare(post2[this.selectedSort])
+      )
     }
   }
+  // watch: {
+  //   selectedSort(newValue) {
+  //     this.posts.sort((post1, post2) => {
+  //       return post1[newValue]?.localeCompare(post2[this.selectedSort])
+  //     })
+  //   }
+  // }
 }
 </script>
 
