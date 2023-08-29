@@ -1,6 +1,7 @@
 <template>
   <div class="app">
     <h1>Posts page</h1>
+    <InputRegular v-model="searchQuery" placeholder="Search..."></InputRegular>
     <div class="app__btn__wrapper">
       <SelectRegular v-model="selectedSort" :options="sortOptions" />
       <ButtonRegular class="app__btn_create" @click="showDialog">Create new post</ButtonRegular>
@@ -8,7 +9,7 @@
     <DialogRegular v-model:show="dialogVisible">
       <post-form @create="createPost" />
     </DialogRegular>
-    <PostList :posts="selectSort" @remove="removePost" v-if="!isPostsLoading" />
+    <PostList :posts="searchInPost" @remove="removePost" v-if="!isPostsLoading" />
     <SpinnerRegular class="app__spinner" v-else>Posts is loading...</SpinnerRegular>
   </div>
 </template>
@@ -72,6 +73,7 @@ export default {
       dialogVisible: false,
       isPostsLoading: false,
       selectedSort: '',
+      searchQuery: '',
       sortOptions: [
         { value: 'title', name: 'By name' },
         { value: 'body', name: 'By content' },
@@ -115,6 +117,10 @@ export default {
       return [...this.posts].sort((post1, post2) =>
         post1[this.selectedSort]?.localeCompare(post2[this.selectedSort])
       )
+    },
+    searchInPost() {
+      console.log(this.searchQuery)
+      return this.selectSort.filter((post) => post.title.includes(this.searchQuery))
     }
   }
   // watch: {
