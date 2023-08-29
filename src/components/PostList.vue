@@ -31,11 +31,14 @@ export default {
 }
 .postList-enter-active,
 .postList-leave-active {
-  transition: all 1s ease;
+  transition: all 0.3s ease;
 }
 .postList-enter-from,
 .postList-leave-to {
   opacity: 0;
-  transform: translateY(30px);
+  transform: translateX(30px);
+}
+.postList-move {
+  transition: transform 0.4s ease-in;
 }
 </style>
