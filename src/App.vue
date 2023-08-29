@@ -55,18 +55,15 @@ export default {
     async fetchPosts() {
       try {
         const url = 'https://jsonplaceholder.typicode.com/posts'
-
-        setTimeout(async () => {
-          const response = await axios.get(url, {
-            params: {
-              _page: this.page,
-              _limit: this.pageLimit
-            }
-          })
-          this.totalPages = Math.ceil(response.headers['x-total-count'] / this.limit)
-          this.posts = response.data
-          this.isPostsLoading = false
-        }, 1000)
+        const response = await axios.get(url, {
+          params: {
+            _page: this.page,
+            _limit: this.pageLimit
+          }
+        })
+        this.totalPages = Math.ceil(response.headers['x-total-count'] / this.limit)
+        this.posts = response.data
+        this.isPostsLoading = false
       } catch (e) {
         alert('Error, see console for details')
         console.log(e.message)
@@ -84,15 +81,13 @@ export default {
       return [...this.posts].sort((post1, post2) =>
         post1[this.selectedSort]?.localeCompare(post2[this.selectedSort])
       )
+    },
+    searchInPost() {
+      return this.selectSort.filter((post) =>
+        post.title.toLowerCase().includes(this.searchQuery.toLowerCase())
+      )
     }
   }
-  // watch: {
-  //   selectedSort(newValue) {
-  //     this.posts.sort((post1, post2) => {
-  //       return post1[newValue]?.localeCompare(post2[this.selectedSort])
-  //     })
-  //   }
-  // }
 }
 </script>
 
