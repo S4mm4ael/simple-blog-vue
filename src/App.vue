@@ -9,7 +9,11 @@
     <DialogRegular v-model:show="dialogVisible">
       <post-form @create="createPost" />
     </DialogRegular>
-    <PostList :posts="searchInPost" @remove="removePost" v-if="!isPostsLoading" />
+    <div class="app__PostWrapper" v-if="!isPostsLoading">
+      <PaginationRegular :pagesLimit="this.totalPages" :page="page" @update="changePage($event)" />
+      <PostList :posts="searchInPost" @remove="removePost" />
+      <PaginationRegular :pagesLimit="this.totalPages" :page="page" @update="changePage($event)" />
+    </div>
     <SpinnerRegular class="app__spinner" v-else>Posts is loading...</SpinnerRegular>
   </div>
 </template>
@@ -52,6 +56,9 @@ export default {
     showDialog() {
       this.dialogVisible = true
     },
+    changePage(pageNumber) {
+      this.page = pageNumber
+    },
     async fetchPosts() {
       try {
         const url = 'https://jsonplaceholder.typicode.com/posts'
@@ -61,7 +68,7 @@ export default {
             _limit: this.pageLimit
           }
         })
-        this.totalPages = Math.ceil(response.headers['x-total-count'] / this.limit)
+        this.totalPages = Math.ceil(response.headers['x-total-count'] / this.pageLimit)
         this.posts = response.data
         this.isPostsLoading = false
       } catch (e) {
