@@ -31,6 +31,9 @@ export default {
       isPostsLoading: true,
       selectedSort: '',
       searchQuery: '',
+      page: 1,
+      pageLimit: 20,
+      totalPages: 0,
       sortOptions: [
         { value: 'title', name: 'By name' },
         { value: 'body', name: 'By content' },
@@ -51,9 +54,16 @@ export default {
     },
     async fetchPosts() {
       try {
-        const url = 'https://jsonplaceholder.typicode.com/posts?_limit=10'
+        const url = 'https://jsonplaceholder.typicode.com/posts'
+
         setTimeout(async () => {
-          const response = await axios.get(url)
+          const response = await axios.get(url, {
+            params: {
+              _page: this.page,
+              _limit: this.pageLimit
+            }
+          })
+          this.totalPages = Math.ceil(response.headers['x-total-count'] / this.limit)
           this.posts = response.data
           this.isPostsLoading = false
         }, 1000)
@@ -63,9 +73,9 @@ export default {
       }
     }
   },
-  // mounted() {
-  //   this.fetchPosts()
-  // },
+  mounted() {
+    this.fetchPosts()
+  },
   computed: {
     selectSort() {
       if (this.selectedSort === 'id') {
@@ -73,11 +83,6 @@ export default {
       }
       return [...this.posts].sort((post1, post2) =>
         post1[this.selectedSort]?.localeCompare(post2[this.selectedSort])
-      )
-    },
-    searchInPost() {
-      return this.selectSort.filter((post) =>
-        post.title.toLowerCase().includes(this.searchQuery.toLowerCase())
       )
     }
   }
