@@ -1,6 +1,7 @@
 <template>
   <div class="post">
     <div class="">
+      <span class="post__id">{{ post.id }}</span>
       <div class=""><strong>Title: </strong>{{ post.title }}</div>
       <div class=""><strong>Description: </strong>{{ post.body }}</div>
     </div>
@@ -22,6 +23,7 @@ export default {
 <style scoped>
 .post {
   display: flex;
+  position: relative;
   gap: 10px;
   padding: 10px;
   border-radius: 10px;
@@ -30,6 +32,15 @@ export default {
   display: flex;
   align-items: center;
   justify-content: space-between;
+}
+.post__id {
+  position: absolute;
+  right: 5px;
+  bottom: 5px;
+  color: grey;
+  font-size: 0.5rem;
+  height: 10px;
+  width: 10px;
 }
 
 .post__btn:hover {

@@ -9,8 +9,13 @@
     <DialogRegular v-model:show="dialogVisible">
       <post-form @create="createPost" />
     </DialogRegular>
-    <PostList :posts="searchInPost" @remove="removePost" v-if="!isPostsLoading" />
-    <SpinnerRegular class="app__spinner" v-else>Posts is loading...</SpinnerRegular>
+    <div v-if="!isPostsLoading">
+      <PaginationRegular :pagesLimit="this.totalPages" :page="page" @update="changePage($event)" />
+      <PostList :posts="searchInPost" @remove="removePost" />
+      <PaginationRegular :pagesLimit="this.totalPages" :page="page" @update="changePage($event)" />
+    </div>
+    <SpinnerRegular class="app__spinner" v-else />
+    <div ref="observer" class="app__observer"></div>
   </div>
 </template>
 
@@ -52,6 +57,10 @@ export default {
     showDialog() {
       this.dialogVisible = true
     },
+    changePage(pageNumber) {
+      this.page = pageNumber
+      this.fetchPosts()
+    },
     async fetchPosts() {
       try {
         const url = 'https://jsonplaceholder.typicode.com/posts'
@@ -61,9 +70,28 @@ export default {
             _limit: this.pageLimit
           }
         })
-        this.totalPages = Math.ceil(response.headers['x-total-count'] / this.limit)
+        this.totalPages = Math.ceil(response.headers['x-total-count'] / this.pageLimit)
         this.posts = response.data
+      } catch (e) {
+        alert('Error, see console for details')
+        console.log(e.message)
+      } finally {
         this.isPostsLoading = false
+      }
+    },
+    async fetchMorePosts() {
+      try {
+        this
+        const url = 'https://jsonplaceholder.typicode.com/posts'
+        const response = await axios.get(url, {
+          params: {
+            _page: this.page,
+            _limit: this.pageLimit
+          }
+        })
+        this.totalPages = Math.ceil(response.headers['x-total-count'] / this.pageLimit)
+        this.posts = [...this.posts, ...response.data]
+        this.page += 1
       } catch (e) {
         alert('Error, see console for details')
         console.log(e.message)
@@ -72,6 +100,18 @@ export default {
   },
   mounted() {
     this.fetchPosts()
+
+    const options = {
+      rootMargin: '0px',
+      threshold: 1.0
+    }
+    const callback = (entries, observer) => {
+      if (entries[0].isIntersecting && this.page < this.totalPages) {
+        this.fetchMorePosts()
+      }
+    }
+    const observer = new IntersectionObserver(callback, options)
+    observer.observe(this.$refs.observer)
   },
   computed: {
     selectSort() {
@@ -115,5 +155,8 @@ export default {
 .app__btn__wrapper {
   display: flex;
   justify-content: space-between;
+}
+.app__observer {
+  height: 50px;
 }
 </style>
