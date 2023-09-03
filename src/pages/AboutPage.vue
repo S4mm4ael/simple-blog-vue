@@ -1,8 +1,7 @@
 <template>
   <section class="about">
     <h1>About</h1>
-    <h3>Hi! My name is Semion</h3>
-    <p>I am new to Vue, this is my first study project:</p>
+    <p>Hi! My name is <b>Semion</b>. I am new to Vue and this is my first study project</p>
     <p class="logo">
       <a href="https://vuejs.org/" target="”_blank”">
         <img src="/assets/svg/vue.svg" alt="vue" height="120px"
