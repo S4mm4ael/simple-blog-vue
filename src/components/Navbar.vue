@@ -1,18 +1,17 @@
 <template>
   <div class="NavbarRegular">
     <div class="NavbarRegular__item">
-      <img class="NavbarRegular__logo" src="../../public/assets/svg/logo.svg" alt="logo" />
+      <img
+        class="NavbarRegular__logo"
+        @click="$router.push('/')"
+        src="../../public/assets/svg/logo.svg"
+        alt="logo"
+      />
     </div>
     <div class="NavbarRegular__item">
-      <ButtonRegular>
-        <RouterLink class="NavbarRegular__links" to="/">Main</RouterLink></ButtonRegular
-      >
-      <ButtonRegular>
-        <RouterLink class="NavbarRegular__links" to="/posts">Posts</RouterLink></ButtonRegular
-      >
-      <ButtonRegular>
-        <RouterLink class="NavbarRegular__links" to="/about">About</RouterLink></ButtonRegular
-      >
+      <ButtonRegular @click="$router.push('/')"> Main</ButtonRegular>
+      <ButtonRegular @click="$router.push('/posts')"> Posts</ButtonRegular>
+      <ButtonRegular @click="$router.push('/about')"> About</ButtonRegular>
     </div>
   </div>
 </template>
@@ -40,7 +39,7 @@ export default { components: { ButtonRegular } }
   display: flex;
   align-items: center;
   gap: 10px;
-  font-size: 1.5rem;
+  font-size: 1.2rem;
 }
 .NavbarRegular a {
   all: unset;
@@ -54,5 +53,10 @@ export default { components: { ButtonRegular } }
 .NavbarRegular__logo {
   height: 60px;
   padding-bottom: 5px;
+  transition: 0.3s;
+  cursor: pointer;
+}
+.NavbarRegular__logo:hover {
+  transform: scale(1.1);
 }
 </style>
