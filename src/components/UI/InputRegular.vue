@@ -19,7 +19,6 @@ export default {
 <style scoped>
 .input {
   all: unset;
-  width: 100%;
   cursor: pointer;
   border: 0px solid black;
   border-radius: 10px;
