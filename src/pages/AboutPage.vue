@@ -1,5 +1,5 @@
 <template>
-  <section class="about">
+  <section class="About">
     <h1>About</h1>
     <p>Hi! My name is <b>Semion</b>. I am new to Vue and this is my first study project</p>
     <p class="logo">
@@ -36,7 +36,7 @@ export default {}
 </script>
 
 <style scoped>
-.about {
+.About {
   display: flex;
   flex-direction: column;
   gap: 20px;

@@ -23,6 +23,8 @@ export default {
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
   transition: 0.3s;
   font-size: 1em;
+  display: flex;
+  align-items: center;
 }
 .btn:hover {
   box-shadow: rgba(0, 110, 255, 0.35) 0px 5px 15px;
