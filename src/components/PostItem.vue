@@ -4,7 +4,6 @@
       <span class="Post__id">{{ post.id }}</span>
       <div class=""><strong>Title: </strong>{{ post.title }}</div>
       <div class=""><strong>Description: </strong>{{ post.body }}</div>
-      <div><b>Likes</b> = {{ $store.state.likes }}</div>
     </div>
     <div class="Post__btnWrapper">
       <ButtonRegular class="Post__btn" @click="$router.push(`/posts/${post.id}`)"

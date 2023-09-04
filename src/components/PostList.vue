@@ -2,7 +2,12 @@
   <div v-show="posts.length > 0">
     <h2>Posts</h2>
     <transition-group name="postList">
-      <PostItem v-for="post in posts" :post="post" :key="post.id" @remove="$emit('remove', post)" />
+      <PostItem
+        v-for="post in posts"
+        :post="post"
+        :key="post.id"
+        @remove="$emit('remove', post.id)"
+      />
     </transition-group>
   </div>
   <h2 class="postList__emptyHeader" v-show="posts.length == 0">There is no posts...</h2>
@@ -17,6 +22,7 @@ export default {
       required: true
     }
   },
+  emits: ['remove'],
   components: { PostItem }
 }
 </script>
