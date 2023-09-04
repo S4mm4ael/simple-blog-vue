@@ -1,5 +1,10 @@
 <template>
   <div class="Posts">
+    <h2>{{ $store.isAuth ? 'user is auth' : 'isnt auth' }}</h2>
+    <h2>{{ $store.state.likes }}</h2>
+    <ButtonRegular @click="$store.commit('incrementLikes')">+</ButtonRegular>
+    <ButtonRegular @click="$store.commit('decrementLikes')">-</ButtonRegular>
+
     <h1>Posts page</h1>
     <InputRegular
       v-focus
@@ -28,11 +33,13 @@
 import PostList from '@/components/PostList.vue'
 import PostForm from '@/components/PostForm.vue'
 import axios from 'axios'
+import ButtonRegular from '../components/UI/ButtonRegular.vue'
 
 export default {
   components: {
     PostList,
-    PostForm
+    PostForm,
+    ButtonRegular
   },
   data() {
     return {
