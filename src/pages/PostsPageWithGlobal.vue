@@ -17,11 +17,10 @@
       <ButtonRegular class="Posts__btn_create" @click="showDialog">Create new post</ButtonRegular>
     </div>
     <DialogRegular v-model:show="dialogVisible">
-      <post-form @create="addPost($event)" />
+      <post-form @create="createPost" />
     </DialogRegular>
     <div v-if="!isPostsLoading">
-      <PaginationRegular :pagesLimit="totalPages" :page="page" @update="changePage($event)" />
-      <PostList :posts="selectSort" @remove="removePost($event)" />
+      <PostList :posts="searchInPost" @remove="removePost($event)" />
       <PaginationRegular :pagesLimit="totalPages" :page="page" @update="changePage($event)" />
     </div>
     <SpinnerRegular class="Posts__spinner" v-else />
@@ -58,7 +57,7 @@ export default {
       fetchPosts: 'post/fetchPosts',
       fetchMorePosts: 'post/fetchMorePosts'
     }),
-    addPost(post) {
+    createPost(post) {
       this.createPost(post)
       this.dialogVisible = false
     },

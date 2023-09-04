@@ -7,7 +7,7 @@ export const postModule = {
     selectedSort: '',
     searchQuery: '',
     page: 1,
-    pageLimit: 20,
+    pageLimit: 10,
     totalPages: 0,
     sortOptions: [
       { value: 'title', name: 'By name' },
@@ -26,10 +26,7 @@ export const postModule = {
       )
     },
     searchInPost(state, getters) {
-
-      return getters.selectSort.filter((post) => {
-        post.title.toLowerCase().includes(state.searchQuery.toLowerCase())
-      })
+      return getters.selectSort.filter(post => post.title.toLowerCase().includes(state.searchQuery.toLowerCase()))
     }
   },
   mutations: {
