@@ -2,6 +2,7 @@
   <div class="Posts">
     <h1>Posts page</h1>
     <InputRegular
+      v-focus
       class="Posts__search"
       v-model="searchQuery"
       placeholder="Search..."
@@ -19,7 +20,7 @@
       <PaginationRegular :pagesLimit="this.totalPages" :page="page" @update="changePage($event)" />
     </div>
     <SpinnerRegular class="Posts__spinner" v-else />
-    <div ref="observer" class="Posts__observer"></div>
+    <div v-intersection="fetchMorePosts" class="Posts__observer"></div>
   </div>
 </template>
 
@@ -104,18 +105,6 @@ export default {
   },
   mounted() {
     this.fetchPosts()
-
-    const options = {
-      rootMargin: '0px',
-      threshold: 1.0
-    }
-    const callback = (entries) => {
-      if (entries[0].isIntersecting && this.page < this.totalPages) {
-        this.fetchMorePosts()
-      }
-    }
-    const observer = new IntersectionObserver(callback, options)
-    observer.observe(this.$refs.observer)
   },
   computed: {
     selectSort() {
