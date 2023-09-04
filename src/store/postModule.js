@@ -26,6 +26,7 @@ export const postModule = {
       )
     },
     searchInPost(state, getters) {
+
       return getters.selectSort.filter((post) => {
         post.title.toLowerCase().includes(state.searchQuery.toLowerCase())
       })
@@ -52,6 +53,9 @@ export const postModule = {
     },
     removePost(state, id) {
       state.posts = state.posts.filter((p) => p.id !== id)
+    },
+    createPost(state, post) {
+      state.posts.push(post)
     }
   },
   actions: {

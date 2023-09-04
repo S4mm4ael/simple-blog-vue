@@ -17,12 +17,12 @@
       <ButtonRegular class="Posts__btn_create" @click="showDialog">Create new post</ButtonRegular>
     </div>
     <DialogRegular v-model:show="dialogVisible">
-      <post-form @create="createPost" />
+      <post-form @create="addPost($event)" />
     </DialogRegular>
     <div v-if="!isPostsLoading">
-      <PaginationRegular :pagesLimit="totalPages" :page="page" @update="setPage($event)" />
+      <PaginationRegular :pagesLimit="totalPages" :page="page" @update="changePage($event)" />
       <PostList :posts="selectSort" @remove="removePost($event)" />
-      <PaginationRegular :pagesLimit="totalPages" :page="page" @update="setPage($event)" />
+      <PaginationRegular :pagesLimit="totalPages" :page="page" @update="changePage($event)" />
     </div>
     <SpinnerRegular class="Posts__spinner" v-else />
     <div v-intersection="fetchMorePosts" class="Posts__observer"></div>
@@ -51,14 +51,15 @@ export default {
       setPage: 'post/setPage',
       setSelectedSort: 'post/setSelectedSort',
       setSearchQuery: 'post/setSearchQuery',
-      removePost: 'post/removePost'
+      removePost: 'post/removePost',
+      createPost: 'post/createPost'
     }),
     ...mapActions({
       fetchPosts: 'post/fetchPosts',
       fetchMorePosts: 'post/fetchMorePosts'
     }),
-    createPost(post) {
-      this.posts.push(post)
+    addPost(post) {
+      this.createPost(post)
       this.dialogVisible = false
     },
 
@@ -66,7 +67,7 @@ export default {
       this.dialogVisible = true
     },
     changePage(pageNumber) {
-      this.page = pageNumber
+      this.setPage(pageNumber)
       this.fetchPosts()
     }
   },

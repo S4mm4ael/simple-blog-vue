@@ -14,7 +14,7 @@
       type="text"
       placeholder="Description"
     />
-    <ButtonRegular class="btn" @click="createPost"> Create post </ButtonRegular>
+    <ButtonRegular type="button" class="btn" @click="createPost"> Create post </ButtonRegular>
   </form>
 </template>
 
@@ -30,7 +30,7 @@ export default {
   },
   methods: {
     createPost() {
-      this.post.id = Date.now()
+      this.post.id = Math.random().toFixed(2)
       this.$emit('create', this.post)
       this.post = {
         title: '',
