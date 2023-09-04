@@ -11,6 +11,7 @@
     <div class="NavbarRegular__item">
       <ButtonRegular @click="$router.push('/')"> Main</ButtonRegular>
       <ButtonRegular @click="$router.push('/posts')"> Posts</ButtonRegular>
+      <ButtonRegular @click="$router.push('/posts-global')"> Posts VUEX</ButtonRegular>
       <ButtonRegular @click="$router.push('/about')"> About</ButtonRegular>
     </div>
   </div>

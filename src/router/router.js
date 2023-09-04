@@ -1,6 +1,7 @@
 /* eslint-disable no-undef */
 import Main from '../pages/MainPage.vue'
 import PostsPage from '../pages/PostsPage.vue'
+import PostsPageWithGlobal from '../pages/PostsPageWithGlobal.vue'
 import AboutPage from '../pages/AboutPage.vue'
 import PostIdPage from '../pages/PostIdPage.vue'
 import { createRouter, createWebHistory } from 'vue-router'
@@ -22,6 +23,10 @@ const routes = [
   {
     path: '/posts/:id',
     component: PostIdPage
+  },
+  {
+    path: '/posts-global',
+    component: PostsPageWithGlobal
   },
 ]
 
