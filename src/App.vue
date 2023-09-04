@@ -1,16 +1,16 @@
 <template>
-  <Navbar></Navbar>
+  <NavbarRegular></NavbarRegular>
   <div class="app">
     <router-view></router-view>
   </div>
 </template>
 
 <script>
-import Navbar from './components/Navbar.vue'
+import NavbarRegular from './components/NavbarRegular.vue'
 
 export default {
   components: {
-    Navbar
+    NavbarRegular
   }
 }
 </script>
