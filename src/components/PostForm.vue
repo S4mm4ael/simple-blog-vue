@@ -1,7 +1,13 @@
 <template>
   <form @submit.prevent>
     <h3>Add new post</h3>
-    <InputRegular class="PostForm__input" v-model="post.title" type="text" placeholder="Title" />
+    <InputRegular
+      v-focus
+      class="PostForm__input"
+      v-model="post.title"
+      type="text"
+      placeholder="Title"
+    />
     <InputRegular
       class="PostForm__input"
       v-model="post.body"

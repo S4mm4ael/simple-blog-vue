@@ -2,6 +2,7 @@
   <div class="Posts">
     <h1>Posts page</h1>
     <InputRegular
+      v-focus
       class="Posts__search"
       v-model="searchQuery"
       placeholder="Search..."
@@ -27,7 +28,6 @@
 import PostList from '@/components/PostList.vue'
 import PostForm from '@/components/PostForm.vue'
 import axios from 'axios'
-import VIntersection from '../directives/VIntersection'
 
 export default {
   components: {
