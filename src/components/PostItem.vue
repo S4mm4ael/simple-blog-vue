@@ -6,7 +6,7 @@
       <div class=""><strong>Description: </strong>{{ post.body }}</div>
     </div>
     <div class="Post__btnWrapper">
-      <ButtonRegular class="Post__btn" @click="$router.push('/posts/{{ post.id }}')"
+      <ButtonRegular class="Post__btn" @click="$router.push(`/posts/${post.id}`)"
         >Open</ButtonRegular
       >
       <ButtonRegular class="Post__btn" @click="$emit('remove', post)">Delete</ButtonRegular>

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>Post page with ID</h1>
+    <h1>Page for post with ID = {{ $route.params.id }}</h1>
   </div>
 </template>
 
