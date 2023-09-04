@@ -1,11 +1,16 @@
 <template>
-  <div class="post">
+  <div class="Post">
     <div class="">
-      <span class="post__id">{{ post.id }}</span>
+      <span class="Post__id">{{ post.id }}</span>
       <div class=""><strong>Title: </strong>{{ post.title }}</div>
       <div class=""><strong>Description: </strong>{{ post.body }}</div>
     </div>
-    <ButtonRegular class="post__btn" @click="$emit('remove', post)">Delete</ButtonRegular>
+    <div class="Post__btnWrapper">
+      <ButtonRegular class="Post__btn" @click="$router.push(`/posts/${post.id}`)"
+        >Open</ButtonRegular
+      >
+      <ButtonRegular class="Post__btn" @click="$emit('remove', post)">Delete</ButtonRegular>
+    </div>
   </div>
 </template>
 
@@ -21,7 +26,7 @@ export default {
 </script>
 
 <style scoped>
-.post {
+.Post {
   display: flex;
   position: relative;
   gap: 10px;
@@ -33,7 +38,7 @@ export default {
   align-items: center;
   justify-content: space-between;
 }
-.post__id {
+.Post__id {
   position: absolute;
   right: 5px;
   bottom: 5px;
@@ -43,7 +48,11 @@ export default {
   width: 10px;
 }
 
-.post__btn:hover {
+.Post__btn:hover {
   box-shadow: rgba(255, 0, 0, 0.35) 0px 5px 15px !important;
+}
+.Post__btnWrapper {
+  display: flex;
+  gap: 10px;
 }
 </style>

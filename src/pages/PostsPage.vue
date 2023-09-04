@@ -1,7 +1,11 @@
 <template>
   <div class="Posts">
     <h1>Posts page</h1>
-    <InputRegular v-model="searchQuery" placeholder="Search..."></InputRegular>
+    <InputRegular
+      class="Posts__search"
+      v-model="searchQuery"
+      placeholder="Search..."
+    ></InputRegular>
     <div class="Posts__btn__wrPostser">
       <SelectRegular v-model="selectedSort" :options="sortOptions" />
       <ButtonRegular class="Posts__btn_create" @click="showDialog">Create new post</ButtonRegular>
@@ -147,5 +151,8 @@ export default {
 }
 .Posts__observer {
   height: 50px;
+}
+.Posts__search {
+  width: 200px;
 }
 </style>

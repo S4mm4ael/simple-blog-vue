@@ -1,8 +1,19 @@
 <template>
-  <div class="app"><router-view></router-view></div>
+  <NavbarRegular></NavbarRegular>
+  <div class="app">
+    <router-view></router-view>
+  </div>
 </template>
 
-<script></script>
+<script>
+import NavbarRegular from './components/NavbarRegular.vue'
+
+export default {
+  components: {
+    NavbarRegular
+  }
+}
+</script>
 
 <style>
 * {
@@ -11,7 +22,7 @@
   box-sizing: border-box;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
-.app {
+body {
   display: flex;
   flex-direction: column;
   gap: 20px;
