@@ -24,11 +24,11 @@ export async function usePosts(limit) {
       isPostsLoading.value = false
     }
 
-    onMounted(fetching)
-    return {
-      posts, isPostsLoading, totalPages
-    }
+
   }
 
-
+  onMounted(fetching)
+  return {
+    posts, isPostsLoading, totalPages
+  }
 }
