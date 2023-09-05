@@ -1,6 +1,6 @@
 <template>
   <div class="Posts">
-    <h1>Posts page</h1>
+    <h1>Posts page using VUEX</h1>
     <InputRegular
       v-focus
       class="Posts__search"
