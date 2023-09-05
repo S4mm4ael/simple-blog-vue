@@ -1,49 +1,63 @@
 <template>
   <div class="Posts">
     <h1>Posts page using Composition API</h1>
-    <!-- <InputRegular
-      v-focus
-      class="Posts__search"
-      v-model="searchQuery"
-      placeholder="Search..."
-    ></InputRegular>
+
     <div class="Posts__btn__wrPostser">
+      <InputRegular
+        v-focus
+        class="Posts__search"
+        v-model="searchQuery"
+        placeholder="Search..."
+      ></InputRegular>
       <SelectRegular v-model="selectedSort" :options="sortOptions" />
-      <ButtonRegular class="Posts__btn_create" @click="showDialog">Create new post</ButtonRegular>
+      <!-- <ButtonRegular class="Posts__btn_create" @click="showDialog">Create new post</ButtonRegular> -->
     </div>
-    <DialogRegular v-model:show="dialogVisible">
-      <post-form @create="createPost" />
-    </DialogRegular>
+
     <div v-if="!isPostsLoading">
-      <PaginationRegular :pagesLimit="this.totalPages" :page="page" @update="changePage($event)" />
-      <PostList :posts="searchInPost" @remove="removePost" />
-      <PaginationRegular :pagesLimit="this.totalPages" :page="page" @update="changePage($event)" />
+      <PostList :posts="sortedAndSearchedPosts" />
+      <!-- <PaginationRegular :pagesLimit="this.totalPages" :page="page" @update="changePage($event)" /> -->
     </div>
     <SpinnerRegular class="Posts__spinner" v-else />
-    <div v-intersection="fetchMorePosts" class="Posts__observer"></div>-->
+    <!-- <div v-intersection="fetchMorePosts" class="Posts__observer"></div> -->
   </div>
 </template>
 
 <script>
 import PostList from '@/components/PostList.vue'
-import PostForm from '@/components/PostForm.vue'
-import usePosts from '../hooks/usePosts'
+// import PostForm from '@/components/PostForm.vue'
+import { usePosts } from '@/hooks/usePosts'
+import useSortedPosts from '@/hooks/useSortedPosts'
+import useSortedAndSearchedPosts from '@/hooks/useSortedAndSearchedPosts'
 
 export default {
   components: {
-    PostList,
-    PostForm
+    PostList
+    // PostForm
   },
   data() {
     return {
       dialogVisible: false,
-      selectedSort: ''
+      sortOptions: [
+        { value: 'title', name: 'By name' },
+        { value: 'body', name: 'By content' },
+        { value: 'id', name: 'By id' }
+      ]
     }
   },
-  setup() {
-    const { posts, totalPages, isPostsLoading } = usePosts(10)
+  setup(props) {
+    const { posts, isPostsLoading, totalPages } = usePosts(10)
+    const { sortedPosts, selectedSort } = useSortedPosts(posts)
+    const { searchQuery, sortedAndSearchedPosts } = useSortedAndSearchedPosts(sortedPosts)
 
-    return { posts, totalPages, isPostsLoading }
+    return {
+      posts,
+      totalPages,
+      isPostsLoading,
+      sortedPosts,
+      selectedSort,
+      searchQuery,
+      sortedAndSearchedPosts
+    }
   }
 }
 </script>
@@ -61,11 +75,14 @@ export default {
 .Posts__btn__wrPostser {
   display: flex;
   justify-content: space-between;
+  align-items: center;
 }
 .Posts__observer {
   height: 50px;
 }
 .Posts__search {
-  width: 200px;
+  width: 400px !important;
+  height: 28px !important;
+  margin-top: 0 !important;
 }
 </style>
