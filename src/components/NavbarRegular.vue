@@ -4,7 +4,7 @@
       <img
         class="NavbarRegular__logo"
         @click="$router.push('/')"
-        src="../../public/assets/svg/logo.svg"
+        src="/assets/svg/logo.svg"
         alt="logo"
       />
     </div>
@@ -12,6 +12,7 @@
       <ButtonRegular @click="$router.push('/')"> Main</ButtonRegular>
       <ButtonRegular @click="$router.push('/posts')"> Posts</ButtonRegular>
       <ButtonRegular @click="$router.push('/posts-global')"> Posts VUEX</ButtonRegular>
+      <ButtonRegular @click="$router.push('/posts-composition')"> Posts CAPI</ButtonRegular>
       <ButtonRegular @click="$router.push('/about')"> About</ButtonRegular>
     </div>
   </div>
